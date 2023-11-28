@@ -10,7 +10,7 @@ class Countsort{
     // v [0, 0, 0, 1, 2, 2, 3, 3, 4, 5, 5, 5]
     public static int [] countingSort(int [] v){
         // int [] v = {2, 3, 5, 0, 1, 4, 5, 0, 0, 3, 2, 5};
-        int [] v; // = {0, 3, 2, 3, 0, 1, 3, 2};
+        int [] v = {0, 3, 2, 3, 0, 1, 3, 2};
         int [] saida = new int [v.length];
         int max, i, val;
 
@@ -49,6 +49,55 @@ class Countsort{
         }
 
         return saida;
+    }
+
+    public static int [] countingSortPos(int [] v, pos){
+        // int [] v = {2, 3, 5, 0, 1, 4, 5, 0, 0, 3, 2, 5};
+        // int [] v = {0, 3, 2, 3, 0, 1, 3, 2};
+        int [] v = {25, 12, 15, 07, 02, 27};
+        int [] saida = new int [v.length];
+        int max, i, val, pos;
+
+        // if(v.length <= 1){
+        //     return v;
+        // }
+
+        // max = v[0];
+
+        // encontrar o maior valor
+        // for(i=0;i<v.length;i++){
+        //     if(v[i] > max){
+        //         max = v[i];
+        //     }
+        // }
+
+        // alocação do count
+        int [] count = new int [10];
+
+        // preenchendo o count
+        for(i=0;i<v.length;i++){
+            val = v[i];
+            count[val]++;
+        }
+
+        // fazendo contagem dos elementos
+        for(i=1;i<count.length;i++){
+            count[i] = count[i] + count[i-1];
+        }
+
+        for(i=v.length-1;i >= 0;i--){
+            val = v[i];
+            count[val]--;
+
+            saida [count[val]] = val;
+        }
+
+        return saida;
+    }
+
+    public static int getValPos(val, pos){
+        //((val%10 elevado a pos+1) / 10 elevado a pos)
+        //val%Math.pow(10, pos +1) / Math.pow(10, pos)
     }
 
     public static void main(String [] args){
